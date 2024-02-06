@@ -53,7 +53,7 @@ export default function App () {
         {showAddFriend && <FormAddFriend onAddFriend={handleAddFriend}/>}
         <Button onClick={handleShowAddFriend}>{showAddFriend ? 'Close' : 'Add Friend'}</Button>
       </div>
-      {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} onSplitBill={handleSplitBill}/>}
+      {selectedFriend && <FormSplitBill key={selectedFriend.id} selectedFriend={selectedFriend} onSplitBill={handleSplitBill}/>}
     </div>
   )
 }
@@ -61,7 +61,7 @@ export default function App () {
 function Friendlist ({friends, onSelection, selectedFriend}) {
 
   return (
-    <ul>
+    <ul >
       {friends.map(f => <Friend selectedFriend={selectedFriend} onSelection={onSelection} friendsObj={f} key={crypto.randomUUID()}/>)}
     </ul>
   )
@@ -71,7 +71,7 @@ function Friend ({friendsObj, onSelection, selectedFriend}) {
   const isSelected = selectedFriend?.id === friendsObj.id
   
   return (
-    <li className={isSelected ? 'selected' : ''}>
+    <li className={isSelected ? 'selected' : ''} >
       <img src={friendsObj.image} alt={friendsObj.name} />
       <h3>{friendsObj.name}</h3>
 
@@ -146,7 +146,7 @@ function FormSplitBill ({selectedFriend, onSplitBill}){
   }
 
   return(
-    <form className="form-split-bill" onSubmit={handleSubmit}>
+    <form className="form-split-bill" onSubmit={handleSubmit} >
       <h2>Split a bill with {selectedFriend.name}</h2>
 
       <label>💰 Bill value</label>
